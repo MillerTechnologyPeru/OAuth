@@ -48,3 +48,83 @@ extension JSONWebToken: Equatable where Header: Equatable, Body: Equatable { }
 extension JSONWebToken: Hashable where Header: Hashable, Body: Hashable { }
 
 extension JSONWebToken: Sendable where Header: Sendable, Body: Sendable { }
+
+// MARK: - Supporting Types
+
+/// Represents a JWT header
+public struct JWTHeader: Codable {
+    
+    /// Signing algorithm
+    public let algorithm: JWTAlgorithm
+    
+    /// Type of token (usually "JWT")
+    public let type: JWTType?
+    
+    /// Key ID, used to select the correct public key
+    public let keyId: String?
+    
+    /// Content type, optional
+    public let contentType: String?
+    
+    public init(
+        algorithm: JWTAlgorithm,
+        type: JWTType? = .jwt,
+        keyId: String? = nil,
+        contentType: String? = nil
+    ) {
+        self.algorithm = algorithm
+        self.type = type
+        self.keyId = keyId
+        self.contentType = contentType
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case algorithm = "alg"
+        case type = "typ"
+        case keyId = "kid"
+        case contentType = "cty"
+    }
+}
+
+/// Standard JWT / JWS signing algorithms
+public enum JWTAlgorithm: String, Codable, CaseIterable, Sendable {
+    
+    // HMAC (symmetric)
+    case hs256 = "HS256"
+    case hs384 = "HS384"
+    case hs512 = "HS512"
+    
+    // RSA (asymmetric)
+    case rs256 = "RS256"
+    case rs384 = "RS384"
+    case rs512 = "RS512"
+    
+    // RSASSA-PSS (asymmetric)
+    case ps256 = "PS256"
+    case ps384 = "PS384"
+    case ps512 = "PS512"
+    
+    // ECDSA (asymmetric)
+    case es256 = "ES256"
+    case es384 = "ES384"
+    case es512 = "ES512"
+    
+    // None (unsigned)
+    case none = "none"
+}
+
+/// JWT header type
+public enum JWTType: String, Codable, Equatable {
+    
+    /// JSON Web Token
+    case jwt = "JWT"
+    
+    /// JSON Web Signature
+    case jws = "JWS"
+    
+    /// JSON Web Encryption
+    case jwe = "JWE"
+    
+    /// Generic JOSE object (rare)
+    case jose = "JOSE"
+}
