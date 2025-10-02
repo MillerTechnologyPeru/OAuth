@@ -16,11 +16,13 @@ public struct TokenRequest: Equatable, Hashable, Codable, Sendable {
     public let grantType: GrantType
     public let scope: String?
     
-    public init(clientId: String,
-                clientSecret: String,
-                audience: String? = nil,
-                grantType: GrantType,
-                scope: String? = nil) {
+    public init(
+        clientId: String,
+        clientSecret: String,
+        audience: String? = nil,
+        grantType: GrantType,
+        scope: String? = nil
+    ) {
         self.clientId = clientId
         self.clientSecret = clientSecret
         self.audience = audience
