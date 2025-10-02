@@ -114,7 +114,7 @@ public enum JWTAlgorithm: String, Codable, CaseIterable, Sendable {
 }
 
 /// JWT header type
-public enum JWTType: String, Codable, Equatable {
+public enum JWTType: String, Codable, CaseIterable, Sendable {
     
     /// JSON Web Token
     case jwt = "JWT"
