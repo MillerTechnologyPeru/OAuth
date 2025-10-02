@@ -52,7 +52,7 @@ extension JSONWebToken: Sendable where Header: Sendable, Body: Sendable { }
 // MARK: - Supporting Types
 
 /// Represents a JWT header
-public struct JWTHeader: Codable {
+public struct JWTHeader: Equatable, Hashable, Codable, Sendable {
     
     /// Signing algorithm
     public let algorithm: JWTAlgorithm
