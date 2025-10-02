@@ -7,7 +7,7 @@
 
 public struct TokenResponse <Header, Payload> {
     
-    public let tokenType: String
+    public let tokenType: TokenType
     public let scope: String?
     public let expiresIn: Int
     public let extExpiresIn: Int?
