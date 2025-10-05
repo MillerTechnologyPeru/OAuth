@@ -13,7 +13,7 @@ import FoundationNetworking
 import HTTP
 
 /// OAuth Authorization Token
-public struct AuthorizationToken<Header, Payload> {
+public struct AuthorizationToken<Header: JWTHeader, Payload: JWTPayload> {
     
     public let rawValue: String
     

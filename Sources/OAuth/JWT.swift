@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - JWT
 
-public struct JSONWebToken <Header, Body> {
+public struct JSONWebToken <Header: JWTHeader, Body: JWTPayload> {
     
     public let header: Header
     
@@ -49,10 +49,40 @@ extension JSONWebToken: Hashable where Header: Hashable, Body: Hashable { }
 
 extension JSONWebToken: Sendable where Header: Sendable, Body: Sendable { }
 
+/// JWT Header
+public protocol JWTHeader {
+    
+    var algorithm: JWTAlgorithm { get }
+    
+    var type: JWTType? { get }
+    
+    var keyId: String? { get }
+    
+    var contentType: String? { get }
+}
+
+/// JWT Payload
+public protocol JWTPayload: Identifiable {
+    
+    var id: String { get }
+    
+    var issuer: String { get }
+    
+    var subject: String { get }
+    
+    var audience: String { get }
+    
+    var expiration: Date { get }
+    
+    var notBefore: Date { get }
+    
+    var issuedAt: Date { get }
+}
+
 // MARK: - Supporting Types
 
-/// Represents a JWT header
-public struct JWTHeader: Equatable, Hashable, Codable, Sendable {
+/// Represents a Standard JWT header
+public struct JWTStandardHeader: Equatable, Hashable, Codable, Sendable {
     
     /// Signing algorithm
     public let algorithm: JWTAlgorithm

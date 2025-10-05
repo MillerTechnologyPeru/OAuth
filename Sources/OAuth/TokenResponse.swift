@@ -5,7 +5,7 @@
 //  Created by Alsey Coleman Miller on 10/1/25.
 //
 
-public struct TokenResponse <Header, Payload> {
+public struct TokenResponse <Header: JWTHeader, Payload: JWTPayload> {
     
     public let tokenType: TokenType
     public let scope: String?
