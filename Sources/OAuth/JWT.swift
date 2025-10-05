@@ -74,7 +74,7 @@ public protocol JWTPayload: Identifiable {
     
     var expiration: Date { get }
     
-    var notBefore: Date { get }
+    var notBefore: Date? { get }
     
     var issuedAt: Date { get }
 }
