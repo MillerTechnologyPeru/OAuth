@@ -82,7 +82,7 @@ public protocol JWTPayload: Identifiable {
 // MARK: - Supporting Types
 
 /// Represents a Standard JWT header
-public struct JWTStandardHeader: Equatable, Hashable, Codable, Sendable {
+public struct JWTStandardHeader: JWTHeader, Equatable, Hashable, Codable, Sendable {
     
     /// Signing algorithm
     public let algorithm: JWTAlgorithm
