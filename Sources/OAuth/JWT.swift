@@ -64,7 +64,7 @@ public protocol JWTHeader {
 /// JWT Payload
 public protocol JWTPayload: Identifiable {
     
-    var id: String { get }
+    var id: String? { get }
     
     var issuer: String { get }
     
